@@ -3,17 +3,16 @@ pipeline {
   stages {
     stage('Build') {
       parallel {
-        stage('Build') {
+        stage('Build project') {
           steps {
             sh 'npm install'
+          }
+        }
+        stage('Check versoin') {
+          steps {
             sh 'node -v'
             sh 'npm -v'
             sh 'ng --version'
-          }
-        }
-        stage('') {
-          steps {
-            sh 'node -v'
           }
         }
       }

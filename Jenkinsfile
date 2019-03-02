@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  
+  tools {
+    nodejs 'node6.11.2'
+  }
+
   stages {
     stage('Build') {
       parallel {
@@ -18,7 +23,5 @@ pipeline {
       }
     }
   }
-  tools {
-    nodejs 'node6.11.2'
-  }
+  
 }

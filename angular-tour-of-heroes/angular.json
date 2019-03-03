@@ -130,6 +130,134 @@
           }
         }
       }
+    },
+    "adsd": {
+      "root": "projects/adsd/",
+      "sourceRoot": "projects/adsd/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/adsd",
+            "index": "projects/adsd/src/index.html",
+            "main": "projects/adsd/src/main.ts",
+            "polyfills": "projects/adsd/src/polyfills.ts",
+            "tsConfig": "projects/adsd/tsconfig.app.json",
+            "assets": [
+              "projects/adsd/src/favicon.ico",
+              "projects/adsd/src/assets"
+            ],
+            "styles": [
+              "projects/adsd/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/adsd/src/environments/environment.ts",
+                  "with": "projects/adsd/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "adsd:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "adsd:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "adsd:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/adsd/src/test.ts",
+            "polyfills": "projects/adsd/src/polyfills.ts",
+            "tsConfig": "projects/adsd/tsconfig.spec.json",
+            "karmaConfig": "projects/adsd/karma.conf.js",
+            "styles": [
+              "projects/adsd/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/adsd/src/favicon.ico",
+              "projects/adsd/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/adsd/tsconfig.app.json",
+              "projects/adsd/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "adsd-e2e": {
+      "root": "projects/adsd-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/adsd-e2e/protractor.conf.js",
+            "devServerTarget": "adsd:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "adsd:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/adsd-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-tour-of-heroes"

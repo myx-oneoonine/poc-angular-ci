@@ -14,10 +14,12 @@ pipeline {
         
         stage('Build') {
           steps {
+            git branch: 'develop', url: 'https://github.com/myx4play/poc-angular-ci'
             dir('my-app') {
               sh 'ls'
               sh 'npm install'
             }
+            
           }
         }
     
@@ -27,25 +29,29 @@ pipeline {
           }
         }
     
-        stage('Deploy for Develop') {
-            when {
-                branch 'develop'  
-            }
-            steps {
-              sh './jenkins/scripts/develop-script.sh'
-              input message: 'Finished using the web site? (Click "Proceed" to continue)'
-              sh './jenkins/scripts/kill.sh'
-            }
-        }
-    
-        stage('Deploy for Planning Features') {
-            when {
-                branch 'planning'  
-            }
-            steps {
-                sh './jenkins/scripts/planning-script.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+        stage('Development Deploy') {
+            parallel {
+                stage('develop') {
+                    when {
+                        branch 'develop'  
+                    }
+                    steps {
+                      sh './jenkins/scripts/develop-script.sh'
+                      input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                      sh './jenkins/scripts/kill.sh'
+                    }
+                }
+                
+                stage('planning') {
+                    when {
+                        branch 'planning'  
+                    }
+                    steps {
+                        sh './jenkins/scripts/planning-script.sh'
+                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                        sh './jenkins/scripts/kill.sh'
+                    }
+                }
             }
         }
     }  

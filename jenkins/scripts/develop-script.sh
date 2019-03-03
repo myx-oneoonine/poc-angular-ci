@@ -5,5 +5,5 @@ cd my-app
 pwd
 ng serve &
 sleep 1
-echo $! > .pidfile
+echo $! > ../.pidfile
 set +x

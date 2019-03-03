@@ -10,6 +10,7 @@ pipeline {
       parallel {
         stage('Build project') {
           steps {
+            sh 'cd my-app'
             sh 'npm install'
           }
         }

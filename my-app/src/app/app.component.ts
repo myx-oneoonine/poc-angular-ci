@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'My First Angular App';
+  featureA = "feature A"
+  featureB = "feature B"
+  featureC = "feature C"
+
+  value = 1
 }
